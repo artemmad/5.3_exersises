@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     // !!!! Установите свой адрес сервера !!!!
-    public static String URL="http://set.you.ip.addr:8080";
+    public static String URL="http://10.132.68.168:8080";
     EditText name,age;
     Button get,send;
     TextView list;
@@ -60,13 +62,22 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        StudentsService service = retrofit.create(StudentsService.class);
-        Call<Student> call = service.putStudent(student);
+
+
+
+
+              StudentsService service = retrofit.create(StudentsService.class);
+              String stud = new Gson().toJson(student);
+              Call<Student> call = service.putStudent(student);
         try {
             Response<Student> userResponse = call.execute();
             Student s = userResponse.body();
             Log.d("SEND_AND_RETURN","Student: "+s);
-        } catch (IOException e) {
+        }
+
+
+
+        catch (IOException e) {
             e.printStackTrace();
         }
             return null;

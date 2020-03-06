@@ -15,9 +15,13 @@ public class Student {
         this.name=name;
         this.age=age;
     }
+    @Override
     public String toString(){
         return name+" ("+age+"лет)";
     }
+
+
+
     public String getName() {
         return name;
     }
